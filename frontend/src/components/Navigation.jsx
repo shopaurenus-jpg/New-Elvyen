@@ -45,9 +45,13 @@ const Navigation = () => {
           <Link
             to="/"
             data-testid="nav-logo"
-            className="text-2xl font-heading font-bold text-white relative z-10"
+            className="relative z-10"
           >
-            <span className="text-cyan-500">El</span>vyen
+            <img 
+              src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png" 
+              alt="Elvyen Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}

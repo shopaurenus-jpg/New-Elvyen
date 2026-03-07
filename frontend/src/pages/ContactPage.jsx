@@ -198,9 +198,9 @@ const ContactPage = () => {
                   <div>
                     <p className="font-medium mb-1">Location</p>
                     <p className="text-gray-400">
-                      San Francisco, CA
+                      New Delhi
                       <br />
-                      United States
+                      India
                     </p>
                   </div>
                 </div>
