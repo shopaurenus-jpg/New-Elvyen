@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const PortfolioPage = () => {
   const [filter, setFilter] = useState('all');
@@ -10,51 +10,57 @@ const PortfolioPage = () => {
   const projects = [
     {
       id: 1,
-      title: 'FinanceFlow',
+      title: 'Trello',
       category: 'web-app',
       description: 'Modern fintech dashboard with real-time analytics and data visualization',
       image: 'https://images.unsplash.com/photo-1769120064066-4ab270e38ea8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
       tags: ['React', 'Node.js', 'MongoDB'],
+      link: 'https://trello.com/',
     },
     {
       id: 2,
-      title: 'NeuralHub',
+      title: 'Synthesia',
       category: 'web-app',
       description: 'AI-powered content generation platform with intuitive interface',
       image: 'https://images.unsplash.com/photo-1762279388952-85187155e48d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
       tags: ['Next.js', 'OpenAI', 'TailwindCSS'],
+      link: 'https://www.synthesia.io/',
     },
     {
       id: 3,
-      title: 'QuantumStore',
+      title: 'Target',
       category: 'e-commerce',
       description: 'Next-gen e-commerce platform with immersive 3D product views',
       image: 'https://images.unsplash.com/photo-1581084243124-209fc8f93cf6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
       tags: ['React', 'Three.js', 'Stripe'],
+      link: 'https://www.target.com/',
     },
     {
       id: 4,
-      title: 'CreativeStudio',
+      title: 'Active Theory',
       category: 'website',
       description: 'Portfolio website for a creative agency with stunning animations',
       image: 'https://images.unsplash.com/photo-1772056382223-d6e5ec57dd9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
       tags: ['Next.js', 'GSAP', 'Framer Motion'],
+      link: 'https://activetheory.net/',
     },
     {
       id: 5,
-      title: 'HealthTrack',
+      title: 'Raycast',
       category: 'web-app',
       description: 'Health and fitness tracking application with personalized insights',
       image: 'https://images.unsplash.com/photo-1758117169154-ba6ffd8f51ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
       tags: ['React', 'Firebase', 'Chart.js'],
+      link: 'https://www.raycast.com/',
     },
     {
       id: 6,
-      title: 'DesignSystem Pro',
+      title: 'Landbook',
       category: 'ui-ux',
       description: 'Comprehensive design system for enterprise applications',
-      image: 'https://images.unsplash.com/photo-1769120064066-4ab270e38ea8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
+      image: 'https://images.unsplash.com/photo-1758520145147-c30bc656f314?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBjcmVhdGl2ZSUyMG9mZmljZSUyMHRlYW0lMjB3b3JraW5nJTIwZGFyayUyMGxpZ2h0aW5nfGVufDB8fHx8MTc3Mjg3NzkyMXww&ixlib=rb-4.1.0&q=85',
       tags: ['Figma', 'Storybook', 'React'],
+      link: 'https://land-book.com/',
     },
   ];
 
@@ -111,21 +117,29 @@ const PortfolioPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) => (
-              <motion.div
+              <motion.a
                 key={project.id}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 30 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-all duration-500"
+                className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-all duration-500 block cursor-pointer"
                 data-testid={`portfolio-project-${project.id}`}
               >
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden relative">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <p className="text-cyan-500 text-sm flex items-center gap-1">
+                      View Project <ArrowRight className="w-4 h-4" />
+                    </p>
+                  </div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
@@ -146,7 +160,7 @@ const PortfolioPage = () => {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
