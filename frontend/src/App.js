@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import CustomCursor from './components/CustomCursor';
 import SmoothScroll from './components/SmoothScroll';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
@@ -35,6 +36,9 @@ function App() {
 
           {/* Footer */}
           <Footer />
+
+          {/* WhatsApp Floating Button */}
+          <WhatsAppButton />
         </div>
       </SmoothScroll>
     </BrowserRouter>
