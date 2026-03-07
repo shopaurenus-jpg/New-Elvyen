@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -11,20 +15,41 @@ const ContactPage = () => {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Frontend validation only
-    if (formData.name && formData.email && formData.message) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setFormData({ name: '', email: '', company: '', message: '' });
-      }, 3000);
+    
+    // Frontend validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setError('Please fill in all required fields');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await axios.post(`${API}/contact`, formData);
+      
+      if (response.data.status === 'success') {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', email: '', company: '', message: '' });
+        }, 5000);
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError(err.response?.data?.detail || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -131,16 +156,26 @@ const ContactPage = () => {
 
                 {submitted ? (
                   <div className="p-4 bg-cyan-500/20 border border-cyan-500/50 rounded-xl text-cyan-500 text-center" data-testid="success-message">
-                    Thank you! We'll get back to you soon.
+                    ✅ Thank you! Your message has been sent successfully. We'll get back to you soon.
                   </div>
                 ) : (
-                  <MagneticButton
-                    type="submit"
-                    data-testid="submit-btn"
-                    className="w-full px-8 py-4 bg-cyan-500 text-black rounded-full font-medium text-lg"
-                  >
-                    Send Message
-                  </MagneticButton>
+                  <>
+                    {error && (
+                      <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 text-center" data-testid="error-message">
+                        {error}
+                      </div>
+                    )}
+                    <MagneticButton
+                      type="submit"
+                      disabled={loading}
+                      data-testid="submit-btn"
+                      className={`w-full px-8 py-4 bg-cyan-500 text-black rounded-full font-medium text-lg ${
+                        loading ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      {loading ? 'Sending...' : 'Send Message'}
+                    </MagneticButton>
+                  </>
                 )}
               </form>
             </motion.div>
