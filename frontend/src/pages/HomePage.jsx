@@ -43,7 +43,7 @@ const HomePage = () => {
   const featuredProjects = [
     {
       id: 1,
-      title: 'FinanceFlow',
+      title: 'Trello',
       category: 'Web Application',
       description: 'Modern fintech dashboard with real-time analytics',
       image: 'https://images.unsplash.com/photo-1769120064066-4ab270e38ea8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
@@ -51,7 +51,7 @@ const HomePage = () => {
     },
     {
       id: 2,
-      title: 'NeuralHub',
+      title: 'Synthesia',
       category: 'AI Platform',
       description: 'AI-powered content generation platform',
       image: 'https://images.unsplash.com/photo-1762279388952-85187155e48d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
@@ -59,7 +59,7 @@ const HomePage = () => {
     },
     {
       id: 3,
-      title: 'QuantumStore',
+      title: 'Target',
       category: 'E-commerce',
       description: 'Next-gen e-commerce with immersive 3D',
       image: 'https://images.unsplash.com/photo-1581084243124-209fc8f93cf6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
@@ -67,7 +67,7 @@ const HomePage = () => {
     },
     {
       id: 4,
-      title: 'CreativeStudio',
+      title: 'Active Theory',
       category: 'Website Design',
       description: 'Portfolio website with stunning animations',
       image: 'https://images.unsplash.com/photo-1772056382223-d6e5ec57dd9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
@@ -75,7 +75,7 @@ const HomePage = () => {
     },
     {
       id: 5,
-      title: 'HealthTrack',
+      title: 'Raycast',
       category: 'Web Application',
       description: 'Health and fitness tracking with personalized insights',
       image: 'https://images.unsplash.com/photo-1758117169154-ba6ffd8f51ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85',
@@ -83,7 +83,7 @@ const HomePage = () => {
     },
     {
       id: 6,
-      title: 'DesignSystem Pro',
+      title: 'Landbook',
       category: 'UI/UX Design',
       description: 'Comprehensive design system for enterprise apps',
       image: 'https://images.unsplash.com/photo-1758520145147-c30bc656f314?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBjcmVhdGl2ZSUyMG9mZmljZSUyMHRlYW0lMjB3b3JraW5nJTIwZGFyayUyMGxpZ2h0aW5nfGVufDB8fHx8MTc3Mjg3NzkyMXww&ixlib=rb-4.1.0&q=85',
