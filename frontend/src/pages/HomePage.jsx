@@ -47,6 +47,7 @@ const HomePage = () => {
       category: 'Web Application',
       description: 'Modern fintech dashboard with real-time analytics',
       image: 'https://images.unsplash.com/photo-1769120064066-4ab270e38ea8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
+      link: 'https://trello.com/',
     },
     {
       id: 2,
@@ -54,6 +55,7 @@ const HomePage = () => {
       category: 'AI Platform',
       description: 'AI-powered content generation platform',
       image: 'https://images.unsplash.com/photo-1762279388952-85187155e48d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85',
+      link: 'https://www.synthesia.io/',
     },
     {
       id: 3,
@@ -216,13 +218,16 @@ const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
-              <motion.div
+              <motion.a
                 key={project.id}
+                href={project.link}
+                target={project.link ? "_blank" : undefined}
+                rel={project.link ? "noopener noreferrer" : undefined}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-2xl aspect-[4/3]"
+                className={`group relative overflow-hidden rounded-2xl aspect-[4/3] block ${project.link ? 'cursor-pointer' : ''}`}
                 data-testid={`project-card-${project.id}`}
               >
                 <img
@@ -234,8 +239,13 @@ const HomePage = () => {
                   <p className="text-cyan-500 text-sm font-mono mb-2">{project.category}</p>
                   <h3 className="font-heading text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-gray-400 text-sm">{project.description}</p>
+                  {project.link && (
+                    <p className="text-cyan-500 text-xs mt-3 flex items-center gap-1">
+                      View Project <ArrowRight className="w-4 h-4" />
+                    </p>
+                  )}
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
