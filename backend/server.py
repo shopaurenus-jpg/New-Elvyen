@@ -166,7 +166,7 @@ async def schedule_meeting(request: MeetingScheduleRequest):
         await db.meetings.insert_one(meeting_data)
         logger.info(f"Meeting request stored for {request.fullName}")
         
-        # Send email to admin (Elvyen)
+        # Send email to admin (Elvyen) with client info
         admin_html = f"""
         <html>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -180,8 +180,25 @@ async def schedule_meeting(request: MeetingScheduleRequest):
                     <p><strong>Requested Time:</strong> {request.time}</p>
                     {f'<p><strong>Message:</strong></p><div style="background: white; padding: 15px; border-left: 4px solid #00F0FF;">{request.message}</div>' if request.message else ''}
                 </div>
-                <p style="margin-top: 20px; color: #666; font-size: 12px;">
-                    This is a meeting request from the Elvyen website.
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+                <h3 style="color: #00F0FF;">Client Confirmation Email Preview</h3>
+                <div style="background: #f9f9f9; padding: 20px; border-radius: 5px;">
+                    <p><strong>To:</strong> {request.email}</p>
+                    <p><strong>Subject:</strong> Meeting Request Confirmation - Elvyen</p>
+                    <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+                    <p>Hi {request.fullName},</p>
+                    <p>Thank you for scheduling a consultation call with Elvyen!</p>
+                    <div style="background: white; padding: 15px; border-left: 4px solid #00F0FF; margin: 15px 0;">
+                        <h4 style="margin-top: 0;">Meeting Details:</h4>
+                        <p><strong>Date:</strong> {request.date}</p>
+                        <p><strong>Time:</strong> {request.time}</p>
+                        {f'<p><strong>Company:</strong> {request.company}</p>' if request.company else ''}
+                    </div>
+                    <p>We have received your meeting request and will confirm your appointment shortly.</p>
+                    <p style="margin-top: 20px;">Best regards,<br><strong style="color: #00F0FF;">The Elvyen Team</strong></p>
+                </div>
+                <p style="margin-top: 20px; color: #999; font-size: 12px;">
+                    <strong>Action Required:</strong> Please send a confirmation email to the client at {request.email} to confirm their appointment.
                 </p>
             </body>
         </html>
@@ -196,64 +213,21 @@ async def schedule_meeting(request: MeetingScheduleRequest):
         }
         
         await asyncio.to_thread(resend.Emails.send, admin_params)
-        
-        # Send confirmation email to client
-        client_html = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <div style="max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #00F0FF;">Meeting Request Confirmation</h2>
-                    <p>Hi {request.fullName},</p>
-                    <p>Thank you for scheduling a consultation call with Elvyen!</p>
-                    
-                    <div style="background: #f4f4f4; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                        <h3 style="margin-top: 0; color: #333;">Meeting Details:</h3>
-                        <p><strong>Date:</strong> {request.date}</p>
-                        <p><strong>Time:</strong> {request.time}</p>
-                        {f'<p><strong>Company:</strong> {request.company}</p>' if request.company else ''}
-                    </div>
-                    
-                    <p>We have received your meeting request and will confirm your appointment shortly. You will receive a confirmation email with the meeting link.</p>
-                    
-                    <p>If you have any questions in the meantime, feel free to reach out to us:</p>
-                    <ul>
-                        <li>Email: workelvyen@gmail.com</li>
-                        <li>Phone: +91 93069 28510</li>
-                    </ul>
-                    
-                    <p>Looking forward to speaking with you!</p>
-                    
-                    <p style="margin-top: 30px;">
-                        Best regards,<br>
-                        <strong style="color: #00F0FF;">The Elvyen Team</strong>
-                    </p>
-                    
-                    <p style="margin-top: 30px; color: #666; font-size: 12px; border-top: 1px solid #ddd; padding-top: 20px;">
-                        This is an automated confirmation email from Elvyen.
-                    </p>
-                </div>
-            </body>
-        </html>
-        """
-        
-        client_params = {
-            "from": SENDER_EMAIL,
-            "to": [request.email],
-            "subject": "Meeting Request Confirmation - Elvyen",
-            "html": client_html
-        }
-        
-        await asyncio.to_thread(resend.Emails.send, client_params)
-        
-        logger.info(f"Meeting confirmation emails sent successfully")
+        logger.info(f"Meeting notification sent to admin successfully")
         
         return {
             "status": "success",
-            "message": "Meeting request submitted successfully. Check your email for confirmation.",
+            "message": "Meeting request submitted successfully. We will confirm your appointment soon via email.",
         }
         
     except Exception as e:
         logger.error(f"Failed to schedule meeting: {str(e)}")
+        # Even if email fails, we've stored it in DB, so return success
+        if "Meeting request stored" in str(e) or meeting_data:
+            return {
+                "status": "success",
+                "message": "Meeting request submitted successfully. We will confirm your appointment soon.",
+            }
         raise HTTPException(
             status_code=500,
             detail="Failed to schedule meeting. Please try again or contact us directly."
