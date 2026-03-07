@@ -51,6 +51,16 @@ class ContactFormRequest(BaseModel):
     company: str = ""
     message: str
 
+# Meeting Schedule Model
+class MeetingScheduleRequest(BaseModel):
+    fullName: str
+    email: EmailStr
+    phone: str
+    company: str = ""
+    date: str
+    time: str
+    message: str = ""
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
@@ -132,6 +142,121 @@ async def submit_contact_form(request: ContactFormRequest):
         raise HTTPException(
             status_code=500, 
             detail="Failed to send your message. Please try again later or email us directly at workelvyen@gmail.com"
+        )
+
+@api_router.post("/schedule-meeting")
+async def schedule_meeting(request: MeetingScheduleRequest):
+    """
+    Handle meeting scheduling and send confirmation emails
+    """
+    try:
+        # Store meeting in database
+        meeting_data = {
+            "fullName": request.fullName,
+            "email": request.email,
+            "phone": request.phone,
+            "company": request.company,
+            "date": request.date,
+            "time": request.time,
+            "message": request.message,
+            "status": "pending",
+            "createdAt": datetime.now(timezone.utc).isoformat(),
+        }
+        
+        await db.meetings.insert_one(meeting_data)
+        logger.info(f"Meeting request stored for {request.fullName}")
+        
+        # Send email to admin (Elvyen)
+        admin_html = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <h2 style="color: #00F0FF;">New Meeting Request - Elvyen</h2>
+                <div style="background: #f4f4f4; padding: 20px; border-radius: 5px;">
+                    <p><strong>Name:</strong> {request.fullName}</p>
+                    <p><strong>Email:</strong> {request.email}</p>
+                    <p><strong>Phone:</strong> {request.phone}</p>
+                    <p><strong>Company:</strong> {request.company if request.company else 'Not provided'}</p>
+                    <p><strong>Requested Date:</strong> {request.date}</p>
+                    <p><strong>Requested Time:</strong> {request.time}</p>
+                    {f'<p><strong>Message:</strong></p><div style="background: white; padding: 15px; border-left: 4px solid #00F0FF;">{request.message}</div>' if request.message else ''}
+                </div>
+                <p style="margin-top: 20px; color: #666; font-size: 12px;">
+                    This is a meeting request from the Elvyen website.
+                </p>
+            </body>
+        </html>
+        """
+        
+        admin_params = {
+            "from": SENDER_EMAIL,
+            "to": [RECIPIENT_EMAIL],
+            "subject": f"New Meeting Request from {request.fullName} - {request.date} at {request.time}",
+            "html": admin_html,
+            "reply_to": request.email
+        }
+        
+        await asyncio.to_thread(resend.Emails.send, admin_params)
+        
+        # Send confirmation email to client
+        client_html = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #00F0FF;">Meeting Request Confirmation</h2>
+                    <p>Hi {request.fullName},</p>
+                    <p>Thank you for scheduling a consultation call with Elvyen!</p>
+                    
+                    <div style="background: #f4f4f4; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                        <h3 style="margin-top: 0; color: #333;">Meeting Details:</h3>
+                        <p><strong>Date:</strong> {request.date}</p>
+                        <p><strong>Time:</strong> {request.time}</p>
+                        {f'<p><strong>Company:</strong> {request.company}</p>' if request.company else ''}
+                    </div>
+                    
+                    <p>We have received your meeting request and will confirm your appointment shortly. You will receive a confirmation email with the meeting link.</p>
+                    
+                    <p>If you have any questions in the meantime, feel free to reach out to us:</p>
+                    <ul>
+                        <li>Email: workelvyen@gmail.com</li>
+                        <li>Phone: +91 93069 28510</li>
+                    </ul>
+                    
+                    <p>Looking forward to speaking with you!</p>
+                    
+                    <p style="margin-top: 30px;">
+                        Best regards,<br>
+                        <strong style="color: #00F0FF;">The Elvyen Team</strong>
+                    </p>
+                    
+                    <p style="margin-top: 30px; color: #666; font-size: 12px; border-top: 1px solid #ddd; padding-top: 20px;">
+                        This is an automated confirmation email from Elvyen.
+                    </p>
+                </div>
+            </body>
+        </html>
+        """
+        
+        client_params = {
+            "from": SENDER_EMAIL,
+            "to": [request.email],
+            "subject": "Meeting Request Confirmation - Elvyen",
+            "html": client_html
+        }
+        
+        await asyncio.to_thread(resend.Emails.send, client_params)
+        
+        logger.info(f"Meeting confirmation emails sent successfully")
+        
+        return {
+            "status": "success",
+            "message": "Meeting request submitted successfully. Check your email for confirmation.",
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to schedule meeting: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to schedule meeting. Please try again or contact us directly."
         )
 
 # Include the router in the main app

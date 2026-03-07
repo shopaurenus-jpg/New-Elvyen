@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Zap, Code, Palette } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
+import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -461,6 +462,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Schedule Meeting */}
+      <ScheduleMeeting />
 
       {/* CTA Section */}
       <section className="py-24 md:py-32 px-6 md:px-12" data-testid="cta-section">
