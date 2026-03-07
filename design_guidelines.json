@@ -1,0 +1,165 @@
+{
+  "project_name": "Elvyen Digital Agency",
+  "design_philosophy": {
+    "identity": "The Anti-AI Designer (E1)",
+    "core_principles": [
+      "Fusion: Cyberpunk Aesthetics + Swiss Typography",
+      "Emotion: Kinetic, Premium, Mysterious",
+      "Content: Storytelling through Motion",
+      "Contrast: Deepest Blacks vs Neon Light"
+    ],
+    "anti_patterns": [
+      "No generic 'Bootstrap' layouts",
+      "No 'Inter' for headings",
+      "No static elements - everything breathes",
+      "No default scrollbars"
+    ]
+  },
+  "theme": {
+    "mode": "dark",
+    "strategy": "forced_dark_mode",
+    "instructions": "The site must always be in dark mode. Override default light mode variables if necessary."
+  },
+  "typography": {
+    "font_family": {
+      "headings": {
+        "name": "Syne",
+        "url": "https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap",
+        "usage": "Use for all H1-H3. weights 700/800 for Hero, 400/500 for subheads.",
+        "class": "font-heading"
+      },
+      "body": {
+        "name": "Outfit",
+        "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap",
+        "usage": "Use for body text, UI elements, buttons.",
+        "class": "font-sans"
+      },
+      "mono": {
+        "name": "Space Mono",
+        "url": "https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap",
+        "usage": "Use for decorative tags, numbers, and technical details.",
+        "class": "font-mono"
+      }
+    },
+    "scaling": {
+      "h1": "text-6xl md:text-8xl lg:text-9xl tracking-tighter leading-[0.9]",
+      "h2": "text-4xl md:text-6xl tracking-tight",
+      "h3": "text-2xl md:text-3xl",
+      "body": "text-base md:text-lg leading-relaxed text-gray-400"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": {
+        "default": "#030303",
+        "surface": "#0A0A0A",
+        "surface_highlight": "#111111"
+      },
+      "primary": {
+        "cyan": "#00F0FF",
+        "blue": "#2D5AF5",
+        "purple": "#7000FF"
+      },
+      "text": {
+        "primary": "#FFFFFF",
+        "secondary": "#9CA3AF",
+        "muted": "#4B5563"
+      },
+      "border": {
+        "subtle": "rgba(255, 255, 255, 0.1)",
+        "highlight": "rgba(0, 240, 255, 0.3)"
+      }
+    },
+    "gradients": {
+      "hero_glow": "radial-gradient(circle at 50% 50%, rgba(45, 90, 245, 0.15) 0%, rgba(0, 0, 0, 0) 50%)",
+      "card_hover": "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%)",
+      "text_gradient": "linear-gradient(to right, #FFFFFF, #9CA3AF)"
+    }
+  },
+  "layout": {
+    "grid_system": {
+      "marketing": "grid-cols-1 md:grid-cols-12 gap-4 md:gap-8",
+      "portfolio": "Bento Grid: Mixed spans (col-span-4, col-span-8)"
+    },
+    "spacing": {
+      "section_padding": "py-24 md:py-32",
+      "container_padding": "px-6 md:px-12"
+    },
+    "z_index": {
+      "cursor": 9999,
+      "nav": 50,
+      "modal": 100,
+      "content": 10,
+      "background": 0
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "group relative px-8 py-4 bg-white text-black rounded-full font-medium hover:scale-105 transition-transform duration-300 overflow-hidden",
+      "secondary": "px-8 py-4 border border-white/20 rounded-full text-white hover:bg-white/10 transition-colors",
+      "magnetic": "Implement magnetic effect on hover using Framer Motion"
+    },
+    "cards": {
+      "service": "bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-cyan-500/50 transition-colors duration-500 group",
+      "project": "relative aspect-[4/3] overflow-hidden rounded-lg group"
+    },
+    "cursor": {
+      "style": "custom-cursor",
+      "behavior": "Follows mouse with delay (lerp). Expands on hover over interactive elements. Mix-blend-mode: difference."
+    },
+    "navigation": {
+      "style": "Floating glassmorphism header. Blurs background."
+    }
+  },
+  "visual_enhancers": {
+    "noise": "Overlay a fixed noise texture with low opacity (3%) to reduce digital flatness.",
+    "glows": "Use colored blurs behind key elements (Hero text, CTA) to create depth.",
+    "parallax": "Images and text should move at different speeds on scroll.",
+    "borders": "1px borders with low opacity. Use 'tracing beam' effect on active cards."
+  },
+  "motion": {
+    "library": "Framer Motion + GSAP",
+    "scrolling": "Lenis (MANDATORY) for smooth momentum scrolling.",
+    "transitions": {
+      "page_load": "Staggered reveal of elements from bottom-up.",
+      "hover": "Spring physics (stiffness: 400, damping: 30).",
+      "text_reveal": "Split text into words/chars and animate y-axis + opacity."
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_abstract": "https://images.unsplash.com/photo-1772056382223-d6e5ec57dd9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85",
+      "service_bg": "https://images.unsplash.com/photo-1758117169154-ba6ffd8f51ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85",
+      "about_team": "https://images.unsplash.com/photo-1758520145147-c30bc656f314?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBjcmVhdGl2ZSUyMG9mZmljZSUyMHRlYW0lMjB3b3JraW5nJTIwZGFyayUyMGxpZ2h0aW5nfGVufDB8fHx8MTc3Mjg3NzkyMXww&ixlib=rb-4.1.0&q=85",
+      "project_1": "https://images.unsplash.com/photo-1769120064066-4ab270e38ea8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwzfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85",
+      "project_2": "https://images.unsplash.com/photo-1762279388952-85187155e48d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIyfDA&ixlib=rb-4.1.0&q=85",
+      "project_3": "https://images.unsplash.com/photo-1581084243124-209fc8f93cf6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMDNkJTIwbmVvbiUyMGJsdWUlMjBjeWFuJTIwc2hhcGVzJTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcyODc3OTIwfDA&ixlib=rb-4.1.0&q=85"
+    },
+    "icons": {
+      "library": "Lucide React (Default) + Phosphor Icons (for weight)",
+      "style": "Thin strokes (1.5px), neon color on hover."
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure text is readable on dark backgrounds (WCAG AA).",
+    "reduced_motion": "Disable parallax and heavy movement if prefers-reduced-motion is true.",
+    "aria": "All interactive elements must have aria-labels.",
+    "testing": "Use data-testid attributes for all interactive elements."
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALLATION: Run 'yarn add framer-motion gsap @studio-freight/lenis lucide-react clsx tailwind-merge'",
+    "2. CONFIG: Update tailwind.config.js to include the colors and fonts defined above.",
+    "3. STRUCTURE: Create a layout wrapper that initializes Lenis scroll.",
+    "4. DEVELOP: Start with the Hero section. Use the 'magnetic' button effect and large Syne typography.",
+    "5. INTERACTION: Every hover must provide feedback. No dead clicks.",
+    "6. TESTING: Ensure all interactive elements have data-testid attributes.",
+    "7. FILE EXTENSION: Use .js and .jsx for files as requested."
+  ],
+  "universal_guidelines": [
+    "Do not use gradients for text unless it is a very large heading.",
+    "Avoid generic centered layouts. Use asymmetry.",
+    "Use glass-morphism with backdrop-blur-xl for the navbar.",
+    "Do not use 'Inter' for headings. Use 'Syne'.",
+    "Add a global noise overlay using fixed position div with pointer-events-none."
+  ]
+}
